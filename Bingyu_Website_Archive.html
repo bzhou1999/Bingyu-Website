@@ -1,0 +1,2524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingyu Zhou | Artist Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        :root {
+            --primary: #000;
+            --secondary: #333;
+            --light: #fff;
+            --accent: #e63946;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            --light-bg: #f8f8f8;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Typography - Improved with modern type scale */
+        h1, h2, h3, h4 {
+            font-weight: 300;
+            letter-spacing: 0.03em;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 10;
+        }
+        
+
+        /* Interactive section titles with first-letter underline */
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block; /* This allows the underline to be the width of the text */
+        }
+
+        /* The line that will expand */
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0; /* Always starts from the left edge of the text */
+            width: 0.7em; /* Width of approximately first letter */
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* On hover, expand to full width */
+        h2:hover:after {
+            width: 100%;
+        }
+
+        /* For centered headings - we need a wrapper div */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center h2 {
+            /* The text-align center will position the h2 in the center of the container */
+            text-align: center;
+        }
+
+        /* The heading's line will still start from its left edge and expand right */
+        .text-center h2:after {
+            left: 0;
+            transform: none;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 200;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .small-note {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header - with improved animations */
+        header {
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: transparent; /* Always transparent */
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
+            /* Remove any background-color rules */
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 100;
+            letter-spacing: 0.1em;
+            position: relative;
+            display: inline-block;
+            transition: var(--transition);
+            cursor: none !important;
+            color: white; /* Default color when at top */
+        }
+
+        header.scrolled .logo {
+            color: var(--primary); /* Changes to dark when header is scrolled */
+        }
+
+        header.scrolled nav ul li a {
+            color: var(--primary); /* Changes to dark when header is scrolled */
+        }
+
+        .logo:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor; /* Uses current text color */
+            transition: var(--transition);
+        }
+
+        .logo:hover:after {
+            width: 100%;
+        }
+        
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1002;
+            transition: var(--transition);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2.5rem;
+        }
+        
+        nav ul li a {
+            position: relative;
+            padding-bottom: 0.5rem;
+            transition: var(--transition);
+            font-weight: 400;
+            opacity: 0.8;
+            cursor: none !important;
+            color: white; /* Default color when at top */
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary);
+            transition: width 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        
+        nav ul li a:hover {
+            opacity: 1;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section - with enhanced animations */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: transform 10s ease;
+            animation: subtle-zoom 20s ease infinite alternate;
+        }
+        
+        @keyframes subtle-zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.08);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 0 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid white;
+            color: white;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: white;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: black;
+        }
+
+        .cta-button:hover:before {
+            width: 100%;
+        }
+
+        /* Scroll Indicator with improved animation */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+        }
+
+        .hero.active .scroll-indicator {
+            opacity: 1;
+            animation: fade-in-up 1s ease forwards;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .scroll-text {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .arrow {
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid #fff;
+            border-right: 2px solid #fff;
+            transform: rotate(45deg);
+            margin: 0 0 8px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        .arrow:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .arrow:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            40% {
+                transform: rotate(45deg) translateY(-8px);
+            }
+            60% {
+                transform: rotate(45deg) translateY(-4px);
+            }
+        }
+
+        /* Typewriter Animation - improved */
+        .typewriter h1 {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 2.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        }
+
+        .typewriter p {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 2.3s;
+        }
+
+        .fade-in-button {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 3s;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Gallery Section - with improved interactions */
+        .gallery {
+            background-color: var(--light);
+            position: relative;
+        }
+        
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(248,248,248,1) 0%, rgba(255,255,255,1) 100%);
+            z-index: 0;
+        }
+        
+        .gallery .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-button {
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem 0.75rem;
+            border: none;
+            background-color: transparent;
+            cursor: none !important; /* Add this line */
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .filter-button.active, .filter-button:hover {
+            color: var(--primary);
+            opacity: 1;
+        }
+        
+        .filter-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .filter-button.active::after, .filter-button:hover::after {
+            width: 30px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 380px;
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+            cursor: none;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            color: #fff;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item-overlay h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.1s;
+        }
+        
+        .gallery-item-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease 0.2s;
+        }
+
+        .gallery-item:hover .gallery-item-overlay h3,
+        .gallery-item:hover .gallery-item-overlay p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Modal - with improved design and interactions */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 15, 15, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .modal.active .modal-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            position: relative;
+            width: 100%;
+            height: auto;
+            min-height: 300px;
+            max-height: 70vh;
+            overflow: hidden;
+            background-color: #000;
+            flex-shrink: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 10s ease;
+        }
+        
+        .modal-header:hover img {
+            transform: scale(1.05);
+        }
+
+        .modal-body {
+            padding: 3rem;
+            background-color: #fff;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2100;
+            color: #fff;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(0,0,0,0.8);
+            transform: rotate(90deg);
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 2001;
+            box-sizing: border-box;
+        }
+        
+        .modal-nav span {
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0,0,0,0.5);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            transform: translateX(0);
+        }
+        
+        .modal-prev {
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-next {
+            transform: translateX(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-content:hover .modal-prev,
+        .modal-content:hover .modal-next {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .modal-nav span:hover {
+            background-color: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        /* Content Sections - improved styling */
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Add the underline effect */
+        .modal-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0.7em; /* Width of approximately first letter */
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Expand on hover */
+        .modal-title:hover:after {
+            width: 100%;
+        }
+        
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        /* Tabs for organizing content - improved styling */
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+        
+        .modal-tab:hover {
+            opacity: 1;
+        }
+        
+        .modal-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .modal-tab.active {
+            opacity: 1;
+            font-weight: 500;
+        }
+        
+        .modal-tab.active::after {
+            width: 100%;
+        }
+        
+        .modal-tab-content {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            padding-bottom: 2rem;
+        }
+
+        .modal-tab-content.active {
+            opacity: 1;
+            height: auto;
+            overflow: visible;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 3rem;
+            background-color: #fff;
+        }
+
+        /* Enhanced Behance-style flexible gallery layout */
+        .modal-image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-auto-rows: 180px;
+            grid-auto-flow: dense;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        /* Base image styling */
+        .modal-detail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .modal-detail-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Expanded image sizing classes */
+        /* Width variations */
+        .modal-detail-image.landscape {
+            grid-column: span 2;
+        }
+
+        .modal-detail-image.wide {
+            grid-column: span 3;
+        }
+
+        .modal-detail-image.panorama {
+            grid-column: span 4;
+        }
+
+        /* Height variations */
+        .modal-detail-image.portrait {
+            grid-row: span 2;
+        }
+
+        .modal-detail-image.tall {
+            grid-row: span 3;
+        }
+
+        /* Combined size variations */
+        .modal-detail-image.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .modal-detail-image.xlarge {
+            grid-column: span 3;
+            grid-row: span 2;
+        }
+
+        .modal-detail-image.feature {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        .modal-detail-image.hero {
+            grid-column: 1 / -1; /* Span all columns */
+            grid-row: span 2;
+        }
+
+        .modal-detail-image.small-square::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+        }
+
+        /* Single image case */
+        .modal-image-grid.single-image {
+            grid-template-columns: 1fr;
+            grid-auto-rows: auto;
+            max-height: 600px;
+        }
+
+        .modal-image-grid.single-image .modal-detail-image {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: contain;
+        }
+
+        /* Right-aligned image grouping */
+        .modal-detail-image.align-right {
+            justify-self: end;
+        }
+
+        /* Left-aligned image grouping */
+        .modal-detail-image.align-left {
+            justify-self: start;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 992px) {
+            .modal-image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+            
+            .modal-detail-image.wide,
+            .modal-detail-image.panorama,
+            .modal-detail-image.xlarge {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                grid-auto-rows: 140px;
+            }
+            
+            .modal-detail-image.landscape,
+            .modal-detail-image.portrait,
+            .modal-detail-image.tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            
+            .modal-detail-image.large,
+            .modal-detail-image.feature {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+            
+            .modal-detail-image.hero {
+                grid-row: span 1;
+            }
+        }
+
+        
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .modal-section h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0.7em; /* Width of approximately first letter */
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .modal-section h4:hover:after {
+            width: 100%;
+        }
+        
+        /* About Section - with improved design */
+        .about {
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(248,248,248,0) 0%, rgba(245,245,245,1) 100%);
+            z-index: 1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image {
+            height: 620px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: perspective(1000px) rotateY(0deg) scale(0.95);
+        }
+
+        .about-image.scale-up {
+            transform: perspective(1000px) rotateY(-2deg) scale(1);
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(2deg) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .about-image .default-img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .about-image .hover-img {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+
+        .about-image:hover .default-img {
+            opacity: 0;
+            transform: scale(1.05);
+        }
+
+        .about-image:hover .hover-img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .about-text {
+            padding-right: 2rem;
+        }
+
+        .about-text h2 {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        /* Contact Section - with improved design */
+        .contact {
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(0deg, rgba(248,248,248,1) 0%, rgba(255,255,255,0) 100%);
+            z-index: 0;
+        }
+        
+        .contact .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+        
+        .contact-form:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        input, textarea {
+            padding: 1rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            transition: var(--transition);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #bbb;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid white;
+            color: white;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: white;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: black;
+        }
+
+        .cta-button:hover:before {
+            width: 100%;
+        } */
+        
+        button[type="submit"] {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button[type="submit"]:before {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        button[type="submit"]:hover {
+            color: rgb(0, 0, 0);
+        }
+
+        button[type="submit"]:hover:before {
+            width: 100%;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info p i {
+            margin-right: 1rem;
+            width: 20px;
+            opacity: 0.8;
+        }
+        
+        .contact-links {
+            margin-top: 1rem;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            margin-right: 1rem;
+            color: var(--primary);
+            font-weight: 300;
+            position: relative;
+        }
+        
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .contact-link:hover::after {
+            width: 100%;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            transition: var(--transition);
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer - with improved design */
+        footer {
+            padding: 3rem 0;
+            background-color: var(--primary);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #000000, #000000, #000000);
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Animations - enhanced */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .stagger-item.visible {
+            animation: fadeInStagger 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        
+        @keyframes fadeInStagger {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Custom cursor styles - improved */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.1s ease, width 0.3s cubic-bezier(0.19, 1, 0.22, 1), 
+                height 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            mix-blend-mode: difference;
+            opacity: 1;
+        }
+
+        .cursor-dot.expanded {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.60); /* Darker background for better contrast */
+            border: 1px solid rgba(255, 255, 255, 0.20); /* Add border for definition */
+            mix-blend-mode: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Add a special class for when cursor is over modal white backgrounds */
+        .modal-content .cursor-dot.expanded {
+            background-color: rgba(0, 0, 0, 0.6); /* Even darker for modal */
+            border: 1px solid rgba(0, 0, 0, 0.6);
+        }
+
+        .cursor-icon {
+            opacity: 0;
+            color: var(--primary);
+            font-size: 18px; /* Slightly larger icon */
+            font-weight: 600; /* Bolder icon */
+            transition: opacity 0.3s;
+        }
+
+        .modal-content .cursor-icon {
+            color: rgba(0, 0, 0, 0.8); /* Darker icon color in modal */
+        }
+
+        .cursor-dot.expanded .cursor-icon {
+            opacity: 1;
+        }
+
+        /* Apply cursor-none only to specific elements */
+        .gallery-item,
+        .cta-button.fade-in-button {
+            cursor: none !important;
+        }
+
+        /* Improve cursor behavior */
+        .cursor-dot.hidden {
+            opacity: 0;
+        }
+        
+        /* Responsive Design - improved */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 92%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about::before {
+                width: 100%;
+                height: 60%;
+                top: auto;
+                bottom: 0;
+                background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(248,248,248,0) 100%);
+            }
+            
+            .about-image {
+                height: 500px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                text-align: center;
+            }
+            
+            .about-text h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            section {
+                padding: 5rem 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background-color: rgba(255, 255, 255, 0.98);
+                box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+                transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+                z-index: 1001;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 5rem 2rem;
+            }
+            
+            nav ul li {
+                margin: 1.2rem 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+            }
+            
+            .modal-body {
+                padding: 2rem;
+            }
+            
+            .modal-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .modal-tab {
+                padding: 0.8rem 1rem;
+            }
+            
+            .about-image {
+                height: 400px;
+            }
+            
+            .skills {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .stagger-animation-delay {
+                animation-delay: 0s !important;
+            }
+            
+            .typewriter h1 {
+                white-space: normal;
+                animation: fadeInUp 1s ease-out forwards;
+                animation-delay: 0.5s;
+            }
+            
+            .hero p, .fade-in-button {
+                animation-delay: 1s !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .gallery-item {
+                height: 300px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .modal-header {
+                min-height: 250px;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Bingyu Zhou</a>
+            
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-image">
+            <img src="images/All_About_Diffusion.png" alt="Featured Artwork">
+        </div>
+        
+        <div class="hero-content">
+            <div class="typewriter">
+                <h1>Visual Story Telling</h1>
+                <p>Welcome to my artistic journey. Explore a collection of works that express emotion, creativity, and perspective.</p>
+            </div>
+            <a href="#gallery" class="cta-button fade-in-button">Explore Gallery</a>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-text">Scroll Down</div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <!-- <h2 class="fade-in text-center">My Portfolio</h2> -->
+            <div class="text-center">
+                <h2>My Portfolio</h2>
+            </div>
+            
+            <div class="gallery-filter fade-in">
+                <button class="filter-button active" data-filter="all">All Works</button>
+                <button class="filter-button" data-filter="Commercial">Commercial</button>
+                <button class="filter-button" data-filter="Editorial">Editorial</button>
+                <button class="filter-button" data-filter="Sci-fi">Sci-fi</button>
+                <button class="filter-button" data-filter="Selfscape">Selfscape</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <!-- Gallery Items - Replace with your own artwork -->
+                <div class="gallery-item stagger-item" data-category="Sci-fi">
+                    <img src="images/All_About_Diffusion.png" alt="Artwork 1">
+                    <div class="gallery-item-overlay">
+                        <h3>All About Diffusion</h3>
+                        <p>Digital, 2025</p>
+                        <p class="small-note">Winner of 2025 Sci-Art Competition</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="images/Solarpunk_Dreamscape.png" alt="Artwork 2">
+                    <div class="gallery-item-overlay">
+                        <h3>Solarpunk Dreamscape</h3>
+                        <p>Flame Tree Publishing</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item stagger-item" data-category="">
+                    <img src="/api/placeholder/600/700" alt="Artwork 3">
+                    <div class="gallery-item-overlay">
+                        <h3>Urban Reflections</h3>
+                        <p>Charcoal on Paper, 2022</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item stagger-item" data-category="Sci-fi">
+                    <img src="/api/placeholder/600/700" alt="Artwork 4">
+                    <div class="gallery-item-overlay">
+                        <h3>Autumn Whispers</h3>
+                        <p>Acrylic on Canvas, 2023</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item stagger-item" data-category="Commercial">
+                    <img src="/api/placeholder/600/700" alt="Artwork 5">
+                    <div class="gallery-item-overlay">
+                        <h3>Eternal Form</h3>
+                        <p>Bronze, 2021</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="/api/placeholder/600/700" alt="Artwork 6">
+                    <div class="gallery-item-overlay">
+                        <h3>Digital Horizon</h3>
+                        <p>Digital Painting, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Gallery Items -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="modal-close"><i class="fas fa-times"></i></span>
+            
+            <!-- Modal Header with main image -->
+            <div class="modal-header">
+                <img src="" alt="Artwork" class="modal-main-image">
+                <div class="modal-nav">
+                    <span class="modal-prev"><i class="fas fa-chevron-left"></i></span>
+                    <span class="modal-next"><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+            
+            <!-- Modal Body with tabs and content -->
+            <div class="modal-body">
+                <h3 class="modal-title">Artwork Title</h3>
+                <p class="modal-subtitle">Medium, Year</p>
+                
+                <!-- Tabs for content organization -->
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="description">Behind</div>
+                    <div class="modal-tab" data-tab="gallery">Beyond</div>
+                </div>
+                
+                <!-- Tab Content Areas -->
+                <div class="modal-tab-content active" data-tab="description">
+                    <div class="modal-description">
+                        <p>Main artwork description goes here. This is a placeholder for the detailed description of the artwork.</p>
+                    </div>
+                    <ul class="modal-details-list">
+                        <div><strong>Dimensions:</strong> <span class="artwork-dimensions">24 x 36 inches</span></div>
+                        <div><strong>Materials:</strong> <span class="artwork-materials">Acrylic on Canvas</span></div>
+                        <div><strong>Created:</strong> <span class="artwork-date">January 2025</span></div>
+                        <div><strong>Collection:</strong> <span class="artwork-collection">Private Collection</span></div>
+                    </ul>
+                </div>
+                
+                <div class="modal-tab-content" data-tab="gallery">
+                    <div class="modal-image-grid">
+                        <!-- Sample placeholders for additional images -->
+                        <img src="/api/placeholder/600/600" alt="Detail 1" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 2" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 3" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 4" class="modal-detail-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/ZBY.jpeg" alt="Artist Portrait" class="default-img">
+                    <img src="images/ZBY2.jpg" alt="Artist Alternate" class="hover-img" loading="lazy">
+                </div>
+                <div class="about-text fade-in">
+                    <h2>About Me</h2>
+                    <p>I am Bingyu, a freelance designer and full-time data scientist based in Boston. Originally from Suzhou, Jiangsu, China, I channel my passion for art through both hand-drawn and digital mediums.</p>
+                    <p>My artistic style, ranging from sci-fi to Eastern classic, is a testament to my deep connection to cultural heritage, creative imagination, and analytic background.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2>Get in Touch</h2>
+            </div>
+            <div class="contact-content">
+                <form class="contact-form fade-in">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject">
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div class="contact-info fade-in">
+                    <h3>Contact Information</h3>
+                    <p>Feel free to reach out for commissions, exhibitions, or just to say hello. I'm always open to new opportunities and collaborations.</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:bingyuzhou.art@gmail.com" class="contact-link">bingyuzhou.art@gmail.com</a></p>
+                    <p>
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/bingyu-zhou/" target="_blank" class="contact-link">
+                          linkedin.com/in/bingyu-zhou
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bingyu Zhou. All rights reserved.</p>
+            <p>Crafted with passion for art and creativity.</p>
+        </div>
+    </footer>
+
+    <!-- Custom cursor -->
+    <div class="cursor-dot">
+        <i class="cursor-icon fas fa-circle-dot"></i>
+    </div>
+
+    <script>
+        // Document ready function
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all components
+            initHeader();
+            initHero();
+            initGallery();
+            initModal();
+            initAnimations();
+            initCursor();
+            initAboutSection();
+            initContactForm();
+        });
+        
+        // Header functionality with improved scroll detection
+        function initHeader() {
+            const header = document.querySelector('header');
+            const navToggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const logo = document.querySelector('.logo');
+            const heroSection = document.querySelector('.hero');
+            
+            // Scroll effect for header based on hero section
+            window.addEventListener('scroll', function() {
+                // Get hero section bottom position
+                const heroBottom = heroSection.getBoundingClientRect().bottom;
+                
+                // If we're still in the hero section (hero bottom is still visible)
+                if (heroBottom > 0) {
+                    header.classList.remove('scrolled');
+                } else {
+                    header.classList.add('scrolled');
+                }
+            });
+            
+            // Logo click behavior
+            logo.addEventListener('click', function(e) {
+                // If not at top, scroll to top smoothly
+                if (window.scrollY > 50) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                // If already at top, do nothing (default behavior)
+            });
+            
+            // Close mobile nav when clicking links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Highlight active navigation based on scroll position
+            updateActiveNavOnScroll();
+        }
+        
+        // Highlight active nav item based on scroll position
+        function updateActiveNavOnScroll() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('nav ul li a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const scrollPosition = window.scrollY;
+                
+                // Find current section
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                // Update active nav item
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Hero section initialization
+        function initHero() {
+            const hero = document.querySelector('.hero');
+            
+            // Activate hero section after a short delay
+            setTimeout(() => {
+                hero.classList.add('active');
+            }, 300);
+            
+            // Add subtle parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const heroImage = document.querySelector('.hero-image img');
+                
+                // Only apply effect if scroll position is within hero section
+                if (scrollPosition < window.innerHeight) {
+                    heroImage.style.transform = `scale(${1 + scrollPosition * 0.0002}) translateY(${scrollPosition * 0.1}px)`;
+                }
+            });
+        }
+        
+        // Gallery functionality
+        function initGallery() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Filter gallery items
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Apply filter with animation
+                    galleryItems.forEach(item => {
+                        // Remove visible class from all items first to reset animations
+                        item.classList.remove('visible');
+                        
+                        // Show or hide items based on filter
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            setTimeout(() => {
+                                item.style.display = 'block';
+                                // Add small delay before adding visible class
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, 50);
+                            }, 100);
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Modal functionality
+        function initModal() {
+            const modal = document.querySelector('.modal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalMainImage = document.querySelector('.modal-main-image');
+            const modalTitle = document.querySelector('.modal-title');
+            const modalSubtitle = document.querySelector('.modal-subtitle');
+            const modalDescription = document.querySelector('.modal-description');
+            const modalPrev = document.querySelector('.modal-prev');
+            const modalNext = document.querySelector('.modal-next');
+            const modalTabs = document.querySelectorAll('.modal-tab');
+            const modalTabContents = document.querySelectorAll('.modal-tab-content');
+            
+            let galleryItems = document.querySelectorAll('.gallery-item');
+            let currentIndex = 0;
+            
+            // Data structure for artwork information
+            const artworkData = [
+                {
+                    id: 1,
+                    title: "All About Diffusion",
+                    subtitle: "Digital, 2025",
+                    mainImage: "images/All_About_Diffusion.png",
+                    imageStyle: "object-position: 20% 50%;",
+                    description: "<p>Winner of 2025 Sci-Art Competition.</p><p>From tea swirling in water and scent molecules rising, to digestion and the patterns on a leopard’s coat, <strong>All About Diffusion</strong> captures diverse expressions of movement and transformation. Atop the leopard, a mathematician calculates, symbolizing the bridge between abstract theory and lived phenomena. This work blends art, science, and imagination to reveal the unseen forces shaping our world.</p>",
+                    details: {
+                        dimensions: "297 × 210 mm",
+                        materials: "Digital",
+                        created: "May 2025",
+                        collection: "Sci-fi"
+                    },
+                    // Simple examples
+                    gallery: [
+                                { src: "/api/placeholder/1200/600", type: "hero"}, // Full-width header
+                                { src: "/api/placeholder/800/800", type: "feature" }, // Larger featured image
+                                { src: "/api/placeholder/800/800", type: "feature" }, // Larger featured image
+                                { src: "/api/placeholder/800/400", type: "landscape" }, // Standard landscape
+                                // { src: "/api/placeholder/400/800", type: "portrait" }, // Standard portrait
+                                { src: "/api/placeholder/1200/400", type: "panorama" }, // Extra wide panorama
+                                // { src: "/api/placeholder/400/1200", type: "tall" }, // Extra tall image
+                                // { src: "/api/placeholder/900/600", type: "large" }, // 2x2 grid space
+                                // { src: "/api/placeholder/1200/600", type: "xlarge" }, // 3x2 grid space
+                                { src: "/api/placeholder/600/600", type: "small-square"}, // With text overlay
+                                { src: "/api/placeholder/600/600", type: "small-square"}, // With text overlay
+
+                    ],
+                    featuredGalleryLayout: false
+                },
+                {
+                    id: 2,
+                    title: "Solarpunk Dreamscape",
+                    subtitle: "Digital Illustration, 2023",
+                    mainImage: "images/Solarpunk_Dreamscape.png",
+                    imageStyle: "object-position: 50% 20%;",
+                    description: "<p>A vision of a sustainable, harmonious future where technology and nature coexist in perfect balance. This piece explores themes of ecological renewal and technological innovation.</p><p>Solarpunk Dreamscape reimagines urban landscapes as vibrant, living ecosystems where renewable energy, vertical gardens, and community spaces create a utopian environment that celebrates both human ingenuity and natural beauty.</p>",
+                    details: {
+                        dimensions: "18 x 24 inches",
+                        materials: "Digital",
+                        created: "March 2023",
+                        collection: "Artist's Collection"
+                    },
+                    gallery: [
+                                { src: "/api/placeholder/600/600", type: "small-square"}, // With text overlay
+                                { src: "/api/placeholder/600/600", type: "small-square"}, // With text overlay
+                                { src: "/api/placeholder/1200/600", type: "hero"}, // Full-width header
+                                { src: "/api/placeholder/800/800", type: "feature" }, // Larger featured image
+                                { src: "/api/placeholder/800/800", type: "feature" }, // Larger featured image
+                                { src: "/api/placeholder/800/400", type: "landscape" }, // Standard landscape
+                                // { src: "/api/placeholder/400/800", type: "portrait" }, // Standard portrait
+                                { src: "/api/placeholder/1200/400", type: "panorama" }, // Extra wide panorama
+                                // { src: "/api/placeholder/400/1200", type: "tall" }, // Extra tall image
+                                // { src: "/api/placeholder/900/600", type: "large" }, // 2x2 grid space
+                                // { src: "/api/placeholder/1200/600", type: "xlarge" }, // 3x2 grid space
+                                
+                    ],
+                    featuredGalleryLayout: false
+
+                },
+                {
+                    id: 3,
+                    title: "Urban Reflections",
+                    subtitle: "Charcoal on Paper, 2022",
+                    mainImage: "/api/placeholder/600/700",
+                    description: "<p>A contemplative study of urban architecture and its reflection in the waters of a city canal. Through careful manipulation of light and shadow, this piece explores the boundary between the built environment and its mirror image.</p><p>The charcoal medium allows for rich contrasts that capture the interplay of rigid architectural forms with the fluid, distorted reflections below.</p>",
+                    details: {
+                        dimensions: "16 x 20 inches",
+                        materials: "Charcoal on Archival Paper",
+                        created: "October 2022",
+                        collection: "Private Collection"
+                    },
+                    statement: "<p>In 'Urban Reflections,' I wanted to explore how the solid permanence of urban architecture transforms when reflected in water. The charcoal medium allowed me to focus on the essential contrast between light and shadow rather than being distracted by color.</p><p>This work invites viewers to question their perception of reality versus reflection, and to find beauty in the urban landscape that often goes unnoticed in our daily lives.</p>",
+                    gallery: [
+                        "/api/placeholder/400/400",
+                        "/api/placeholder/400/400"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Autumn Whispers",
+                    subtitle: "Acrylic on Canvas, 2023",
+                    mainImage: "/api/placeholder/600/700",
+                    description: "<p>A celebration of the transformative beauty of autumn, capturing the rich palette and ethereal quality of fall foliage. This piece explores the fleeting nature of seasonal change through vibrant brushwork and atmospheric depth.</p><p>'Autumn Whispers' invites viewers to immerse themselves in the sensory experience of a forest in transition, where wind stirs leaves into a gentle dance of color and light.</p>",
+                    details: {
+                        dimensions: "30 x 40 inches",
+                        materials: "Acrylic on Canvas",
+                        created: "November 2023",
+                        collection: "Gallery Exhibition"
+                    },
+                    statement: "<p>With 'Autumn Whispers,' I sought to capture not just the visual splendor of fall, but also the emotional resonance of this transitional season. The techniques used combine traditional brushwork with more experimental approaches to create layers that reveal themselves differently depending on viewing distance and light.</p><p>The title refers to the quiet, almost secretive way that autumn reveals itself - first in subtle hints of color change before culminating in a brilliant display that demands attention.</p>",
+                    gallery: [
+                        "/api/placeholder/400/400",
+                        "/api/placeholder/400/400",
+                        "/api/placeholder/400/400"
+                    ]
+                }
+                // More artwork entries...
+            ];
+            
+            // Function to update the modal with artwork data
+            function updateModal(index) {
+                const artwork = artworkData[index] || {
+                    title: "Artwork Title",
+                    subtitle: "Medium, Year",
+                    mainImage: "/api/placeholder/600/700",
+                    description: "<p>Description not available.</p>"
+                };
+                
+                // Update modal content with animation
+                modal.classList.add('updating');
+                
+                setTimeout(() => {
+                    modalMainImage.src = artwork.mainImage;
+                    modalMainImage.alt = artwork.title;
+                    modalTitle.textContent = artwork.title;
+                    modalSubtitle.textContent = artwork.subtitle;
+                    modalDescription.innerHTML = artwork.description;
+    
+                    if (artwork.imageStyle) {
+                        // Apply the custom style directly to the image
+                        modalMainImage.style = artwork.imageStyle;
+                    } else {
+                        // Reset to default position
+                        modalMainImage.style = "object-position: center center;";
+                    }
+                    
+                    // Update details tab if data exists
+                    if (artwork.details) {
+                        document.querySelector('.artwork-dimensions').textContent = artwork.details.dimensions || 'N/A';
+                        document.querySelector('.artwork-materials').textContent = artwork.details.materials || 'N/A';
+                        document.querySelector('.artwork-date').textContent = artwork.details.created || 'N/A';
+                        document.querySelector('.artwork-collection').textContent = artwork.details.collection || 'N/A';
+                    }
+                    
+                    // Update artist statement if exists
+                    if (artwork.statement) {
+                        document.querySelector('.modal-artist-statement').innerHTML = artwork.statement;
+                    }
+                    
+                    // Update the gallery images function in updateModal
+                    if (artwork.gallery && artwork.gallery.length > 0) {
+                        const imageGrid = document.querySelector('.modal-image-grid');
+                        imageGrid.innerHTML = '';
+                        
+                        // Reset classes
+                        imageGrid.className = 'modal-image-grid';
+                        
+                        // Special case for single image
+                        if (artwork.gallery.length === 1) {
+                            imageGrid.classList.add('single-image');
+                        }
+                        
+                        // Create images and determine their sizes
+                        artwork.gallery.forEach((imgData, index) => {
+                            // Handle different data structures
+                            let imgSrc, imgType, imgCaption, imgAlign;
+                            
+                            // If the gallery item is just a string, it's a simple image path
+                            if (typeof imgData === 'string') {
+                                imgSrc = imgData;
+                            } 
+                            // If it's an object, it has additional metadata
+                            else {
+                                imgSrc = imgData.src;
+                                imgType = imgData.type; // One of the CSS class names
+                                imgCaption = imgData.caption; // Optional caption
+                                imgAlign = imgData.align; // Optional alignment
+                            }
+                            
+                            const img = document.createElement('img');
+                            img.src = imgSrc;
+                            img.alt = imgCaption || "Detail image for " + artwork.title;
+                            img.classList.add('modal-detail-image');
+                            
+                            // Add size class if specified
+                            if (imgType) {
+                                img.classList.add(imgType);
+                            }
+                            
+                            // Add alignment class if specified
+                            if (imgAlign) {
+                                img.classList.add('align-' + imgAlign);
+                            }
+                            
+                            // Auto-detect image dimensions if type not specified
+                            if (!imgType) {
+                                img.onload = function() {
+                                    const ratio = this.naturalWidth / this.naturalHeight;
+                                    
+                                    if (ratio >= 2) {
+                                        this.classList.add('panorama');
+                                    } else if (ratio >= 1.5) {
+                                        this.classList.add('wide');
+                                    } else if (ratio >= 1.2) {
+                                        this.classList.add('landscape');
+                                    } else if (ratio <= 0.5) {
+                                        this.classList.add('tall');
+                                    } else if (ratio <= 0.7) {
+                                        this.classList.add('portrait');
+                                    }
+                                    
+                                    // Make first image large if it's the only one or if there are many
+                                    if (index === 0 && artwork.gallery.length > 3) {
+                                        this.classList.add('feature');
+                                    }
+                                };
+                            }
+                            
+                            // Click on detail image to show it as main image
+                            img.addEventListener('click', function() {
+                                modalMainImage.src = this.src;
+                            });
+                            
+                            imageGrid.appendChild(img);
+                        });
+                    }
+                    
+                    // Reset tabs to show first tab
+                    modalTabs.forEach(tab => tab.classList.remove('active'));
+                    modalTabContents.forEach(content => content.classList.remove('active'));
+                    modalTabs[0].classList.add('active');
+                    modalTabContents[0].classList.add('active');
+                    
+                    modal.classList.remove('updating');
+                }, 300);
+            }
+            
+            // Set up tab functionality
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabTarget = this.getAttribute('data-tab');
+                    
+                    // Only proceed if not already active
+                    if (!this.classList.contains('active')) {
+                        // Update active tab
+                        modalTabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Hide all content first
+                        modalTabContents.forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        
+                        // Show selected content
+                        const activeContent = document.querySelector(`.modal-tab-content[data-tab="${tabTarget}"]`);
+                        activeContent.classList.add('active');
+                    }
+                });
+            });
+            
+            // Initialize modal events
+            function initModalEvents() {
+                // Hook up gallery items to modal
+                galleryItems = document.querySelectorAll('.gallery-item');
+                
+                galleryItems.forEach((item, index) => {
+                    item.addEventListener('click', function() {
+                        currentIndex = index;
+                        updateModal(currentIndex);
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                    });
+                });
+                
+                // Close button functionality
+                modalClose.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                });
+                
+                // Click outside to close
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = ''; // Re-enable scrolling
+                    }
+                });
+                
+                // Previous button
+                modalPrev.addEventListener('click', function() {
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateModal(currentIndex);
+                });
+                
+                // Next button
+                modalNext.addEventListener('click', function() {
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateModal(currentIndex);
+                });
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', function(e) {
+                    if (!modal.classList.contains('active')) return;
+                    
+                    if (e.key === 'Escape') {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = ''; // Re-enable scrolling
+                    } else if (e.key === 'ArrowLeft') {
+                        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                        updateModal(currentIndex);
+                    } else if (e.key === 'ArrowRight') {
+                        currentIndex = (currentIndex + 1) % galleryItems.length;
+                        updateModal(currentIndex);
+                    }
+                });
+            }
+            
+            // Initialize modal system
+            initModalEvents();
+            
+            // Add swipe functionality for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const modalContent = document.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.addEventListener('mouseenter', function() {
+                    cursorDot.classList.add('on-modal');
+                });
+                
+                modalContent.addEventListener('mouseleave', function() {
+                    cursorDot.classList.remove('on-modal');
+                });
+            }
+            
+            modalContent.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            modalContent.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // Swipe left - next
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateModal(currentIndex);
+                }
+                
+                if (touchEndX > touchStartX + 50) {
+                    // Swipe right - previous
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateModal(currentIndex);
+                }
+            }
+            
+            // Public API for future updates
+            window.modalSystem = {
+                open: function(index) {
+                    currentIndex = index;
+                    updateModal(currentIndex);
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                },
+                close: function() {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                },
+                updateData: function(newArtworkData) {
+                    Object.assign(artworkData, newArtworkData);
+                },
+                addArtwork: function(artwork) {
+                    artworkData.push(artwork);
+                }
+            };
+        }
+        
+        // Animations
+        function initAnimations() {
+            // Fade-in elements on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const staggerItems = document.querySelectorAll('.stagger-item');
+            
+            // Set initial state for stagger items
+            staggerItems.forEach((item, index) => {
+                item.style.animationDelay = `${0.1 * index}s`;
+            });
+            
+            function checkFade() {
+                // Fade in elements
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+                
+                // Stagger animations
+                staggerItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (itemTop < windowHeight - 50) {
+                        item.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Check animations on scroll and load
+            window.addEventListener('scroll', checkFade);
+            window.addEventListener('load', checkFade);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL without reload
+                        history.pushState(null, null, targetId);
+                    }
+                });
+            });
+        }
+
+        // Custom cursor
+        function initCursor() {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const heroSection = document.querySelector('.hero');
+
+            // The .logo selector is intentionally missing from this list 
+            // because we handle it separately below
+            const interactiveElements = document.querySelectorAll(`
+                .gallery-item,
+                .cta-button.fade-in-button,
+                button[type="submit"],
+                .filter-button,
+                .modal-tab,
+                nav ul li a,
+                .contact-link,
+                .modal-section h4
+            `);
+            
+            // Move cursor with mouse
+            document.addEventListener('mousemove', function(e) {
+                // Add a small delay for a smoother movement
+                requestAnimationFrame(() => {
+                    cursorDot.style.left = e.clientX + 'px';
+                    cursorDot.style.top = e.clientY + 'px';
+                });
+            });
+            
+            // Show/hide cursor based on mouse movement
+            let cursorTimeout;
+            document.addEventListener('mousemove', function() {
+                cursorDot.classList.remove('hidden');
+                clearTimeout(cursorTimeout);
+                
+                cursorTimeout = setTimeout(() => {
+                    if (!cursorDot.matches(':hover')) {
+                        cursorDot.classList.add('hidden');
+                    }
+                }, 3000);
+            });
+            
+            // Hide cursor when mouse leaves window
+            document.addEventListener('mouseleave', function() {
+                cursorDot.classList.add('hidden');
+            });
+            
+            // Add hover effect for interactive elements
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    cursorDot.classList.add('expanded');
+                    
+                    // Change icon based on element type
+                    if (this.classList.contains('gallery-item')) {
+                        document.querySelector('.cursor-icon').className = 'cursor-icon fas fa-circle-dot';
+                    } else {
+                        document.querySelector('.cursor-icon').className = 'cursor-icon fas fa-circle-dot';
+                    }
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    cursorDot.classList.remove('expanded');
+                });
+            });
+            
+            // Special handling for logo cursor
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.addEventListener('mouseenter', function() {
+                    // Check if we're past the hero section
+                    const heroBottom = heroSection.getBoundingClientRect().bottom;
+                    
+                    if (heroBottom <= 0) {
+                        // Past hero section - show circle-dot cursor
+                        cursorDot.classList.add('expanded');
+                        document.querySelector('.cursor-icon').className = 'cursor-icon fas fa-circle-dot';
+                    }
+                    // When in hero section, don't add 'expanded' class at all
+                });
+                
+                logo.addEventListener('mouseleave', function() {
+                    cursorDot.classList.remove('expanded');
+                });
+            }
+            
+            // Add click animation
+            document.addEventListener('mousedown', function() {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            });
+            
+            document.addEventListener('mouseup', function() {
+                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        }
+        
+        // About section animation
+        function initAboutSection() {
+            const aboutSection = document.getElementById('about');
+            const aboutImage = document.querySelector('.about-image');
+            
+            // Set up the Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // When the about section enters the viewport
+                    if (entry.isIntersecting) {
+                        aboutImage.classList.add('scale-up');
+                    } else {
+                        aboutImage.classList.remove('scale-up');
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px'
+            });
+            
+            // Start observing the about section
+            observer.observe(aboutSection);
+        }
+        
+        // Contact form functionality
+        function initContactForm() {
+            const contactForm = document.querySelector('.contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show sending feedback (you'd replace this with actual form submission)
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.textContent;
+                    
+                    button.textContent = 'Sending...';
+                    button.disabled = true;
+                    
+                    // Simulate sending (replace with actual form submission)
+                    setTimeout(() => {
+                        // Success feedback
+                        button.textContent = 'Message Sent!';
+                        button.style.backgroundColor = '#4CAF50';
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Reset button after delay
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.style.backgroundColor = '';
+                            button.disabled = false;
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

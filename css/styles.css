@@ -1,0 +1,1619 @@
+/*
+ * Bingyu Zhou Portfolio - Styles
+ * Table of Contents:
+ * 1. Reset and Base Styles
+ * 2. Typography
+ * 3. Layout and Containers
+ * 4. Header and Navigation
+ * 5. Hero Section
+ * 6. Gallery Section
+ * 7. Modal
+ * 8. About Section
+ * 9. Contact Section
+ * 10. Footer
+ * 11. Animations and Effects
+ * 12. Custom Cursor
+ * 13. Media Queries
+ */
+
+/* 1. Reset and Base Styles
+========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    /* Colors */
+    --primary: #000;
+    --secondary: #333;
+    --light: #fff;
+    --accent: #e63946;
+    --light-bg: #f8f8f8;
+    
+    /* Effects */
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: var(--light);
+    color: var(--primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 2. Typography
+========================================================================== */
+h1, h2, h3, h4 {
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 10;
+}
+
+
+/* Interactive section titles with first-letter underline */
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block; /* This allows the underline to be the width of the text */
+}
+
+/* The line that will expand */
+h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0; /* Always starts from the left edge of the text */
+    width: 0.7em; /* Width of approximately first letter */
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* On hover, expand to full width */
+h2:hover:after {
+    width: 100%;
+}
+
+/* For centered headings - we need a wrapper div */
+.text-center {
+    text-align: center;
+}
+
+.text-center h2 {
+    /* The text-align center will position the h2 in the center of the container */
+    text-align: center;
+}
+
+/* The heading's line will still start from its left edge and expand right */
+.text-center h2:after {
+    left: 0;
+    transform: none;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 200;
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.small-note {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* 3. Layout and Containers
+========================================================================== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 6rem 0;
+    position: relative;
+}
+
+/* 4. Header and Navigation
+========================================================================== */
+header {
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    transition: var(--transition);
+    background-color: transparent; /* Always transparent */
+}
+
+header.scrolled {
+    padding: 1rem 0;
+    /* Remove any background-color rules */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    position: relative;
+    display: inline-block;
+    transition: var(--transition);
+    cursor: none !important;
+    color: white; /* Default color when at top */
+}
+
+header.scrolled .logo {
+    color: var(--primary); /* Changes to dark when header is scrolled */
+}
+
+header.scrolled nav ul li a {
+    color: var(--primary); /* Changes to dark when header is scrolled */
+}
+
+.logo:after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: currentColor; /* Uses current text color */
+    transition: var(--transition);
+}
+
+.logo:hover:after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1002;
+    transition: var(--transition);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2.5rem;
+}
+
+nav ul li a {
+    position: relative;
+    padding-bottom: 0.5rem;
+    transition: var(--transition);
+    font-weight: 400;
+    opacity: 0.8;
+    cursor: none !important;
+    color: white; /* Default color when at top */
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary);
+    transition: width 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+nav ul li a:hover {
+    opacity: 1;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* 5. Hero Section
+========================================================================== */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: transform 10s ease;
+    animation: subtle-zoom 20s ease infinite alternate;
+}
+
+@keyframes subtle-zoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 0 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-content h1 {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    border: 1px solid white;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: white;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.cta-button:hover {
+    color: black;
+}
+
+.cta-button:hover:before {
+    width: 100%;
+}
+
+/* Scroll Indicator with improved animation */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease 1s;
+}
+
+.hero.active .scroll-indicator {
+    opacity: 1;
+    animation: fade-in-up 1s ease forwards;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.scroll-text {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.arrow {
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+    margin: 0 0 8px 0;
+    animation: bounce 2s infinite;
+}
+
+.arrow:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.arrow:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: rotate(45deg) translateY(0);
+    }
+    40% {
+        transform: rotate(45deg) translateY(-8px);
+    }
+    60% {
+        transform: rotate(45deg) translateY(-4px);
+    }
+}
+
+/* Typewriter Animation - improved */
+.typewriter h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 2.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+.typewriter p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 2.3s;
+}
+
+.fade-in-button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 3s;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 6. Gallery Section
+========================================================================== */
+.gallery {
+    background-color: var(--light);
+    position: relative;
+}
+
+.gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(248,248,248,1) 0%, rgba(255,255,255,1) 100%);
+    z-index: 0;
+}
+
+.gallery .container {
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    padding: 0.5rem 1.5rem;
+    margin: 0.5rem 0.75rem;
+    border: none;
+    background-color: transparent;
+    cursor: none !important; /* Add this line */
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+    opacity: 0.7;
+}
+
+.filter-button.active, .filter-button:hover {
+    color: var(--primary);
+    opacity: 1;
+}
+
+.filter-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.filter-button.active::after, .filter-button:hover::after {
+    width: 30px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    height: 380px;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    cursor: none;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    color: #fff;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.gallery-item:hover .gallery-item-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-item-overlay h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease 0.1s;
+}
+
+.gallery-item-overlay p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease 0.2s;
+}
+
+.gallery-item:hover .gallery-item-overlay h3,
+.gallery-item:hover .gallery-item-overlay p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 7. Modal
+========================================================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 15, 15, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 90vh;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.modal.active .modal-content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.modal-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    max-height: 70vh;
+    overflow: hidden;
+    background-color: #000;
+    flex-shrink: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 10s ease;
+    object-position: center top;
+}
+
+.modal-header:hover img {
+    transform: scale(1.05);
+}
+
+/* Add these styles for videos in the modal gallery */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: var(--transition);
+    cursor: pointer;
+    background-color: #000;
+}
+
+.video-container.vertical {
+    padding-bottom: 177.78%; /* 9:16 aspect ratio */
+}
+
+.video-container.vertical video,
+.video-container.vertical iframe {
+    object-fit: contain; /* Preserve aspect ratio */
+}
+
+.video-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;
+}
+
+.video-container .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.video-container:hover .play-button {
+    background-color: rgba(0, 0, 0, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-button i {
+    color: white;
+    font-size: 30px;
+    margin-left: 5px; /* Offset slightly to center the triangle icon */
+}
+
+.video-caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.modal-body {
+    padding: 3rem;
+    background-color: #fff;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2100;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background-color: rgba(0,0,0,0.8);
+    transform: rotate(90deg);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+    z-index: 2001;
+    box-sizing: border-box;
+}
+
+.modal-nav span {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    transform: translateX(0);
+}
+
+.modal-prev {
+    transform: translateX(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal-next {
+    transform: translateX(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal-content:hover .modal-prev,
+.modal-content:hover .modal-next {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.modal-nav span:hover {
+    background-color: rgba(0,0,0,0.8);
+    transform: scale(1.1);
+}
+
+/* Content Sections - improved styling */
+.modal-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    position: relative;
+    display: inline-block;
+}
+
+/* Add the underline effect */
+.modal-title:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0.7em; /* Width of approximately first letter */
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Expand on hover */
+.modal-title:hover:after {
+    width: 100%;
+}
+
+.modal-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.modal-description {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* Tabs for organizing content - improved styling */
+.modal-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+}
+
+.modal-tab {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.modal-tab:hover {
+    opacity: 1;
+}
+
+.modal-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.modal-tab.active {
+    opacity: 1;
+    font-weight: 500;
+}
+
+.modal-tab.active::after {
+    width: 100%;
+}
+
+.modal-tab-content {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+    /* padding-bottom: 2rem; */
+}
+
+.modal-tab-content.active {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+}
+
+.modal-body {
+    position: relative;
+    padding: 3rem;
+    background-color: #fff;
+}
+
+/* Enhanced Behance-style flexible gallery layout */
+.modal-image-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.gallery-row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.2rem; /* Slightly bigger margin for rows with videos */
+    align-items: start; /* Align items to the top of the row */
+}
+
+/* Base image styling */
+.modal-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    min-height: 200px; /* Ensure all images have a minimum height */
+}
+
+.modal-detail-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Expanded image sizing classes */
+/* Width variations */
+.modal-detail-image.landscape {
+    grid-column: span 2;
+}
+
+.modal-detail-image.wide {
+    grid-column: span 3;
+}
+
+.modal-detail-image.panorama {
+    grid-column: span 4;
+}
+
+/* Height variations */
+.modal-detail-image.portrait {
+    grid-row: span 2;
+}
+
+.modal-detail-image.tall {
+    grid-row: span 3;
+}
+
+/* Combined size variations */
+.modal-detail-image.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.modal-detail-image.xlarge {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.modal-detail-image.feature {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+.modal-detail-image.hero {
+    grid-column: 1 / -1; /* Span all columns */
+    grid-row: span 2;
+}
+
+.modal-detail-image.small-square::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+}
+
+/* Single image case */
+.modal-image-grid.single-image {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    max-height: 600px;
+}
+
+.modal-image-grid.single-image .modal-detail-image {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+}
+
+/* Right-aligned image grouping */
+.modal-detail-image.align-right {
+    justify-self: end;
+}
+
+/* Left-aligned image grouping */
+.modal-detail-image.align-left {
+    justify-self: start;
+}
+
+/* Responsive adjustment */
+@media (max-width: 992px) {
+    .modal-image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    
+    .modal-detail-image.wide,
+    .modal-detail-image.panorama,
+    .modal-detail-image.xlarge {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-auto-rows: 140px;
+    }
+    
+    .modal-detail-image.landscape,
+    .modal-detail-image.portrait,
+    .modal-detail-image.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    
+    .modal-detail-image.large,
+    .modal-detail-image.feature {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .modal-detail-image.hero {
+        grid-row: span 1;
+    }
+}
+
+
+.modal-section {
+    margin-bottom: 2.5rem;
+}
+
+.modal-section h4 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+}
+
+.modal-section h4:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0.7em; /* Width of approximately first letter */
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.modal-section h4:hover:after {
+    width: 100%;
+}
+
+/* 8. About Section
+========================================================================== */
+.about {
+    background-color: var(--light-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(248,248,248,0) 0%, rgba(245,245,245,1) 100%);
+    z-index: 1;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-image {
+    height: 620px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: perspective(1000px) rotateY(0deg) scale(0.95);
+}
+
+.about-image.scale-up {
+    transform: perspective(1000px) rotateY(-2deg) scale(1);
+}
+
+.about-image:hover {
+    transform: perspective(1000px) rotateY(2deg) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.about-image .default-img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.about-image .hover-img {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.about-image:hover .default-img {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.about-image:hover .hover-img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.about-text {
+    padding-right: 2rem;
+}
+
+.about-text h2 {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* 9. Contact Section
+========================================================================== */
+.contact {
+    background-color: var(--light);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(0deg, rgba(248,248,248,1) 0%, rgba(255,255,255,0) 100%);
+    z-index: 0;
+}
+
+.contact .container {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transform: translateY(0);
+    transition: var(--transition);
+}
+
+.contact-form:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+input, textarea {
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: var(--transition);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #bbb;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+button[type="submit"]:before {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+button[type="submit"]:hover {
+    color: rgb(0, 0, 0);
+}
+
+button[type="submit"]:hover:before {
+    width: 100%;
+}
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info h3 {
+    margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info p i {
+    margin-right: 1rem;
+    width: 20px;
+    opacity: 0.8;
+}
+
+.contact-links {
+    margin-top: 1rem;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-right: 1rem;
+    color: var(--primary);
+    font-weight: 300;
+    position: relative;
+}
+
+.contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.contact-link:hover::after {
+    width: 100%;
+}
+
+.social-links {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.social-link {
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    transition: var(--transition);
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.social-link:hover {
+    background-color: var(--primary);
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 10. Footer
+========================================================================== */
+footer {
+    padding: 3rem 0;
+    background-color: var(--primary);
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #000000, #000000, #000000);
+}
+
+footer p {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+/* 11. Animations and Effects
+========================================================================== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.stagger-item.visible {
+    animation: fadeInStagger 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes fadeInStagger {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 12. Custom Cursor
+========================================================================== */
+.cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: transform 0.1s ease, width 0.3s cubic-bezier(0.19, 1, 0.22, 1), 
+        height 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    mix-blend-mode: difference;
+    opacity: 1;
+}
+
+.cursor-dot.expanded {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.60); /* Darker background for better contrast */
+    border: 1px solid rgba(255, 255, 255, 0.20); /* Add border for definition */
+    mix-blend-mode: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add a special class for when cursor is over modal white backgrounds */
+.modal-content .cursor-dot.expanded {
+    background-color: rgba(0, 0, 0, 0.6); /* Even darker for modal */
+    border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.cursor-icon {
+    opacity: 0;
+    color: var(--primary);
+    font-size: 18px; /* Slightly larger icon */
+    font-weight: 600; /* Bolder icon */
+    transition: opacity 0.3s;
+}
+
+.modal-content .cursor-icon {
+    color: rgba(0, 0, 0, 0.8); /* Darker icon color in modal */
+}
+
+.cursor-dot.expanded .cursor-icon {
+    opacity: 1;
+}
+
+/* Apply cursor-none only to specific elements */
+.gallery-item,
+.cta-button.fade-in-button {
+    cursor: none !important;
+}
+
+/* Improve cursor behavior */
+.cursor-dot.hidden {
+    opacity: 0;
+}
+
+/* 13. Media Queries
+========================================================================== */
+/* Responsive Design - improved */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 92%;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-content, .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .about::before {
+        width: 100%;
+        height: 60%;
+        top: auto;
+        bottom: 0;
+        background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(248,248,248,0) 100%);
+    }
+    
+    .about-image {
+        height: 500px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .about-text {
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .about-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    section {
+        padding: 5rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 300px;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+        transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 1001;
+    }
+    
+    nav.active {
+        right: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        padding: 5rem 2rem;
+    }
+    
+    nav ul li {
+        margin: 1.2rem 0;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    
+    .modal-body {
+        padding: 2rem;
+    }
+    
+    .modal-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .modal-tab {
+        padding: 0.8rem 1rem;
+    }
+    
+    .about-image {
+        height: 400px;
+    }
+    
+    .skills {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .stagger-animation-delay {
+        animation-delay: 0s !important;
+    }
+    
+    .typewriter h1 {
+        white-space: normal;
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.5s;
+    }
+    
+    .hero p, .fade-in-button {
+        animation-delay: 1s !important;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    .gallery-item {
+        height: 300px;
+    }
+    
+    .modal-content {
+        max-width: 95%;
+    }
+    
+    .modal-header {
+        min-height: 250px;
+    }
+    
+    .contact-form {
+        padding: 2rem;
+    }
+}

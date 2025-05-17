@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingyu Zhou | Artist Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Bingyu Zhou</a>
+            
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-image">
+            <img src="images/All_About_Diffusion/All_About_Diffusion.png" alt="Featured Artwork">
+        </div>
+        
+        <div class="hero-content">
+            <div class="typewriter">
+                <h1>Visual Story Telling</h1>
+                <p>Welcome to my artistic journey. Explore a collection of works that express emotion, creativity, and perspective.</p>
+            </div>
+            <a href="#gallery" class="cta-button fade-in-button">Explore Gallery</a>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-text">Scroll Down</div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <!-- <h2 class="fade-in text-center">My Portfolio</h2> -->
+            <div class="text-center">
+                <h2>My Portfolio</h2>
+            </div>
+            
+            <div class="gallery-filter fade-in">
+                <button class="filter-button active" data-filter="all">All Works</button>
+                <button class="filter-button" data-filter="Commercial">Commercial</button>
+                <button class="filter-button" data-filter="Editorial">Editorial</button>
+                <button class="filter-button" data-filter="Sci-fi">Sci-fi</button>
+                <button class="filter-button" data-filter="Selfscape">Selfscape</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <!-- Gallery Items - Replace with your own artwork -->
+            
+                <!-- Solarpunk_Dreamscape -->
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="images/Solarpunk_Dreamscape/Solarpunk_Dreamscape.png" alt="Artwork 2">
+                    <div class="gallery-item-overlay">
+                        <h3>Solarpunk Dreamscape</h3>
+                        <p>Flame Tree Publishing</p>
+                    </div>
+                </div>
+
+                <!-- All_About_Diffusion -->
+                <div class="gallery-item stagger-item" data-category="Sci-fi"> 
+                    <img src="images/All_About_Diffusion/All_About_Diffusion.png" alt="Artwork 1">
+                    <div class="gallery-item-overlay">
+                        <h3>All About Diffusion</h3>
+                        <p>Digital, 2025</p>
+                        <p class="small-note">Winner of 2025 Sci-Art Competition</p>
+                    </div>
+                </div>
+                
+                <!-- Butchering_1 -->
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="images/Butchering_1/Butchering1.png" alt="Artwork 3">
+                    <div class="gallery-item-overlay">
+                        <h3>Butchering</h3>
+                        <p>Whitelock Art Center</p>
+                    </div>
+                </div>
+                
+                <!-- Image -->
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="images/Butchering_2/Butchering2.png" alt="Artwork 4">
+                    <div class="gallery-item-overlay">
+                        <h3>Butchering</h3>
+                        <p>Whitelock Art Center</p>
+                    </div>
+                </div>
+                
+                <!-- Image -->
+                <div class="gallery-item stagger-item" data-category="Commercial">
+                    <img src="/api/placeholder/600/700" alt="Artwork 5">
+                    <div class="gallery-item-overlay">
+                        <h3>Eternal Form</h3>
+                        <p>Bronze, 2021</p>
+                    </div>
+                </div>
+                
+                <!-- Image -->
+                <div class="gallery-item stagger-item" data-category="Editorial">
+                    <img src="/api/placeholder/600/700" alt="Artwork 6">
+                    <div class="gallery-item-overlay">
+                        <h3>Digital Horizon</h3>
+                        <p>Digital Painting, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Gallery Items -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="modal-close"><i class="fas fa-times"></i></span>
+            
+            <!-- Modal Header with main image -->
+            <div class="modal-header">
+                <img src="" alt="Artwork" class="modal-header img">
+                <div class="modal-nav">
+                    <span class="modal-prev"><i class="fas fa-chevron-left"></i></span>
+                    <span class="modal-next"><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+            
+            <!-- Modal Body with tabs and content -->
+            <div class="modal-body">
+                <h3 class="modal-title">Artwork Title</h3>
+                <p class="modal-subtitle">Medium, Year</p>
+                
+                <!-- Tabs for content organization -->
+                <div class="modal-tabs">
+                    <div class="modal-tab active" data-tab="description">Behind</div>
+                    <div class="modal-tab" data-tab="gallery">Beyond</div>
+                </div>
+                
+                <!-- Tab Content Areas -->
+                <div class="modal-tab-content active" data-tab="description">
+                    <div class="modal-description">
+                        <p>Main artwork description goes here. This is a placeholder for the detailed description of the artwork.</p>
+                    </div>
+                    <ul class="modal-details-list">
+                        <div><strong>Dimensions:</strong> <span class="artwork-dimensions">24 x 36 inches</span></div>
+                        <div><strong>Materials:</strong> <span class="artwork-materials">Acrylic on Canvas</span></div>
+                        <div><strong>Created:</strong> <span class="artwork-date">January 2025</span></div>
+                        <div><strong>Highlights:</strong> <span class="artwork-collection">Private Collection</span></div>
+                    </ul>
+                </div>
+                
+                <div class="modal-tab-content" data-tab="gallery">
+                    <div class="modal-image-grid">
+                        <!-- Sample placeholders for additional images -->
+                        <img src="/api/placeholder/600/600" alt="Detail 1" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 2" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 3" class="modal-detail-image">
+                        <img src="/api/placeholder/600/600" alt="Detail 4" class="modal-detail-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/ZBY.jpeg" alt="Artist Portrait" class="default-img">
+                    <img src="images/ZBY2.jpg" alt="Artist Alternate" class="hover-img" loading="lazy">
+                </div>
+                <div class="about-text fade-in">
+                    <h2>About Me</h2>
+                    <p>I am Bingyu, a freelance designer and full-time data scientist based in Boston. Originally from Suzhou, Jiangsu, China, I channel my passion for art through both hand-drawn and digital mediums.</p>
+                    <p>My artistic style, ranging from sci-fi to Eastern classic, is a testament to my deep connection to cultural heritage, creative imagination, and analytic background.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2>Get in Touch</h2>
+            </div>
+            <div class="contact-content">
+                <form class="contact-form fade-in">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject">
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div class="contact-info fade-in">
+                    <h3>Contact Information</h3>
+                    <p>Feel free to reach out for commissions, exhibitions, or just to say hello. I'm always open to new opportunities and collaborations.</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:bingyuzhou.art@gmail.com" class="contact-link">bingyuzhou.art@gmail.com</a></p>
+                    <p>
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/bingyu-zhou/" target="_blank" class="contact-link">
+                          linkedin.com/in/bingyu-zhou
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bingyu Zhou. All rights reserved.</p>
+            <p>Crafted with passion for art and creativity.</p>
+        </div>
+    </footer>
+
+    <!-- Custom cursor -->
+    <div class="cursor-dot">
+        <i class="cursor-icon fas fa-circle-dot"></i>
+    </div>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>
