@@ -1203,23 +1203,90 @@ nav ul li a:hover::after {
     gap: 4rem;
 }
 
-.contact-form {
+/* Contact Form Container */
+.contact-form-container {
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 3rem;
+    padding: 1.8rem 3rem 2rem 3rem;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transform: translateY(0);
     transition: var(--transition);
+    height: 800px;
+    box-sizing: border-box;
 }
 
-.contact-form:hover {
+.contact-form-container:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 }
 
-input, textarea {
+/* Contact Tabs */
+.contact-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+    justify-content: center; 
+}
+
+.contact-tab {
+    padding: 1rem 1.5rem;
+    cursor: none !important;
+    position: relative;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.contact-tab:hover {
+    opacity: 1;
+}
+
+.contact-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.contact-tab.active {
+    opacity: 1;
+    font-weight: 500;
+}
+
+.contact-tab.active::after {
+    width: 100%;
+}
+
+.contact-tab-content {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.contact-tab-content.active {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+}
+
+/* Forms */
+.subscription-form,
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* All Form Inputs */
+.contact-form input,
+.contact-form textarea,
+.subscription-form input[type="email"] {
     padding: 1rem;
     margin-bottom: 1.2rem;
     border: 1px solid #eee;
@@ -1229,19 +1296,24 @@ input, textarea {
     transition: var(--transition);
 }
 
-input:focus, textarea:focus {
+.contact-form input:focus,
+.contact-form textarea:focus,
+.subscription-form input[type="email"]:focus {
     outline: none;
     border-color: #bbb;
     background-color: #fff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-textarea {
-    min-height: 150px;
+.contact-form textarea {
+    flex: 1;
+    min-height: 120px;
     resize: vertical;
 }
 
-button[type="submit"] {
+/* Button Styles - Common */
+.contact-form button[type="submit"],
+.subscription-form button[type="submit"] {
     display: inline-block;
     padding: 0.8rem 2.5rem;
     border: 1px solid rgb(0, 0, 0);
@@ -1253,10 +1325,11 @@ button[type="submit"] {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    margin-top: auto;
 }
 
-button[type="submit"]:before {
-
+.contact-form button[type="submit"]:before,
+.subscription-form button[type="submit"]:before {
     content: '';
     position: absolute;
     top: 0;
@@ -1268,13 +1341,48 @@ button[type="submit"]:before {
     z-index: -1;
 }
 
-button[type="submit"]:hover {
+.contact-form button[type="submit"]:hover,
+.subscription-form button[type="submit"]:hover {
     color: rgb(0, 0, 0);
 }
 
-button[type="submit"]:hover:before {
+.contact-form button[type="submit"]:hover:before,
+.subscription-form button[type="submit"]:hover:before {
     width: 100%;
 }
+
+/* Subscription Form Specific */
+.subscription-form h3 {
+    margin-bottom: 2rem; /* Increase from 1rem */
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.subscription-form p {
+    text-align: center;
+    margin-bottom: 3rem; /* Increase from 1.5rem */
+    color: #666;
+    /* line-height: 1.5; Add line height for more space */
+}
+
+.subscription-form input[type="email"] {
+    padding: 1rem;
+    margin-bottom: 3rem; /* Increase from 1.2rem */
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: var(--transition);
+}
+
+.subscribe-note {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 2rem; /* Increase from 1rem */
+    text-align: center;
+}
+
+/* Contact Info */
 .contact-info {
     display: flex;
     flex-direction: column;

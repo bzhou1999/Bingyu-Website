@@ -203,13 +203,35 @@
                 <h2>Get in Touch</h2>
             </div>
             <div class="contact-content">
-                <form class="contact-form fade-in">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="text" placeholder="Subject">
-                    <textarea placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+                <div class="contact-form-container fade-in">
+                    <!-- Contact Tabs - Use Modal Tab Structure -->
+                    <div class="contact-tabs">
+                        <div class="contact-tab active" data-tab="subscribe">Subscribe</div>
+                        <div class="contact-tab" data-tab="message">Message</div>
+                    </div>
+                    
+                    <!-- Tab Content Areas -->
+                    <div class="contact-tab-content active" data-tab="subscribe">
+                        <form class="subscription-form">
+                            <h3>Stay Updated</h3>
+                            <p>Get notified about my new artwork, exhibitions, and creative insights.</p>
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit">Subscribe</button>
+                            <p class="subscribe-note">No spam, just art. Unsubscribe anytime.</p>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-tab-content" data-tab="message">
+                        <form class="contact-form">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <input type="text" placeholder="Subject">
+                            <textarea placeholder="Your Message" required></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
                 <div class="contact-info fade-in">
                     <h3>Contact Information</h3>
                     <p>Feel free to reach out for commissions, exhibitions, or just to say hello. I'm always open to new opportunities and collaborations.</p>
@@ -217,7 +239,7 @@
                     <p>
                         <i class="fab fa-linkedin"></i>
                         <a href="https://www.linkedin.com/in/bingyu-zhou/" target="_blank" class="contact-link">
-                          linkedin.com/in/bingyu-zhou
+                        linkedin.com/in/bingyu-zhou
                         </a>
                     </p>
                 </div>

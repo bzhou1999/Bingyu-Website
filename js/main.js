@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCursor();
     initAboutSection();
     initContactForm();
+    initContactTabs(); 
 });
 
 // Header functionality with improved scroll detection
@@ -523,11 +524,6 @@ function initModal() {
                                 img.classList.add('align-' + imgAlign);
                             }
                             
-                            // Click on detail image to show it as main image
-                            img.addEventListener('click', function() {
-                                modalMainImage.src = this.src;
-                            });
-                            
                             // If there's a caption, add it
                             if (imgCaption) {
                                 const caption = document.createElement('p');
@@ -778,9 +774,10 @@ function initCursor() {
         .modal-tab,
         nav ul li a,
         .contact-link,
-        .modal-section h4
+        .modal-section h4,
+        .contact-tab
     `);
-    
+        
     // Move cursor with mouse
     document.addEventListener('mousemove', function(e) {
         // Add a small delay for a smoother movement
@@ -879,7 +876,6 @@ function initAboutSection() {
     // Start observing the about section
     observer.observe(aboutSection);
 }
-
 // Contact form functionality
 function initContactForm() {
     const contactForm = document.querySelector('.contact-form');
@@ -899,7 +895,7 @@ function initContactForm() {
             setTimeout(() => {
                 // Success feedback
                 button.textContent = 'Message Sent!';
-                button.style.backgroundColor = '#4CAF50';
+                button.style.backgroundColor = '#000000';
                 
                 // Reset form
                 this.reset();
@@ -911,6 +907,40 @@ function initContactForm() {
                     button.disabled = false;
                 }, 3000);
             }, 1500);
+        });
+    }
+}
+
+// Contact tab switching functionality
+function initContactTabs() {
+    const contactTabs = document.querySelectorAll('.contact-tab');
+    const contactTabContents = document.querySelectorAll('.contact-tab-content');
+    
+    contactTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabTarget = this.getAttribute('data-tab');
+            
+            if (!this.classList.contains('active')) {
+                contactTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                contactTabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                const activeContent = document.querySelector(`.contact-tab-content[data-tab="${tabTarget}"]`);
+                activeContent.classList.add('active');
+            }
+        });
+    });
+    
+    // Handle forms
+    const subscriptionForm = document.querySelector('.subscription-form');
+    if (subscriptionForm) {
+        subscriptionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button[type="submit"]');
+            button.textContent = 'Subscribed!';
         });
     }
 }
