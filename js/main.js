@@ -1,3 +1,6 @@
+// Global variables
+let cursorDot;
+
 // Document ready function
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
@@ -9,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCursor();
     initAboutSection();
     initContactForm();
+    initScrollbarVisibility(); // Add this line
 });
 
 // Header functionality with improved scroll detection
@@ -247,6 +251,80 @@ function initModal() {
             ],
             featuredGalleryLayout: false
         },
+
+        // Wave To Save
+        {
+            title: "Wave To Save",
+            subtitle: "Selfscape, 2023",
+            mainImage: "images/Wave_To_Save/WaveToSave.png",
+            imageStyle: "50% 5%",
+            description: "<p>A whale leaps from the ocean’s crest, evoking nature’s untamed beauty—below, it is overtaken by oil spilling from a ruptured tube. <strong>Wave To Save</strong> contrasts resilience and ruin, reflecting on the uneasy coexistence of human industry and the natural world.</p>",
+            details: {
+                dimensions: "297 × 420 cm",
+                materials: "Digital",
+                created: "June 2023",
+                collection: "3rd Prize, 2024 reEarth International Art Prize; Merit Award, 2023 Art on Climate International Illustration Competition"
+            },
+            gallery:[ 
+
+                [
+                    {
+                        src: "images/Wave_To_Save/WaveToSave_Outline.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+                    {
+                        src: "images/Wave_To_Save/WaveToSave.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+
+                ],
+
+                
+            
+                [
+                    {
+                        src: "images/Wave_To_Save/Reearth1.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+                    {
+                        src: "images/Wave_To_Save/Reearth5.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+                    {
+                        src: "images/Wave_To_Save/Reearth4.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+                    {
+                        src: "images/Wave_To_Save/Reearth2.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+
+                ],
+
+                [
+                    {
+                        src: "images/Wave_To_Save/WaveToSave_animation.gif",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+                    {
+                        src: "images/Wave_To_Save/WaveToSave_animation.gif",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+
+                ],
+
+
+            ]
+        },
+
         // Butchering 1
         {
             title: "Butchering",
@@ -308,6 +386,9 @@ function initModal() {
                 ],
             ]
         },
+
+
+
         // More artwork entries...
     ];
     
@@ -329,14 +410,16 @@ function initModal() {
             modalTitle.textContent = artwork.title;
             modalSubtitle.textContent = artwork.subtitle;
             modalDescription.innerHTML = artwork.description;
+            modalMainImage.style.objectPosition = artwork.imageStyle;
 
-            
-            // Example if you're using a property called "imageStyle"
-            if (artwork.imageStyle) {
-                modalMainImage.style.objectPosition = artwork.imageStyle;
-            } else {
-                modalMainImage.style.objectPosition = "center center";
-            }
+            // // Example if you're using a property called "imageStyle"
+            // if (artwork.imageStyle) {
+            //     modalMainImage.style.objectPosition = artwork.imageStyle;
+            //     // console.log('Applied imageStyle:', artwork.imageStyle);
+            // } else {
+            //     modalMainImage.style.objectPosition = "center center";
+            //     // console.log('Applied imageStyle:', artwork.imageStyle);
+            // }
 
                         
             // Update details tab if data exists
@@ -760,7 +843,7 @@ function initAnimations() {
 
 // Custom cursor
 function initCursor() {
-    const cursorDot = document.querySelector('.cursor-dot');
+    cursorDot = document.querySelector('.cursor-dot');
     const heroSection = document.querySelector('.hero');
 
     // The .logo selector is intentionally missing from this list 
@@ -1003,4 +1086,125 @@ function initContactForm() {
             }
         });
     });
+}
+
+// Modern transparent overlay scrollbar functionality
+function initScrollbarVisibility() {
+    const mainScrollbar = document.getElementById('main-scrollbar');
+    const modalScrollbar = document.getElementById('modal-scrollbar');
+    const modal = document.querySelector('.modal');
+    
+    let mainScrollTimeout;
+    let modalScrollTimeout;
+    
+    // Calculate and update main page scrollbar
+    function updateMainScrollbar() {
+        if (!mainScrollbar) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercentage = scrollTop / scrollHeight;
+        
+        const thumb = mainScrollbar.querySelector('.custom-scrollbar-thumb');
+        const trackHeight = mainScrollbar.offsetHeight;
+        const thumbHeight = Math.max(30, (window.innerHeight / document.documentElement.scrollHeight) * trackHeight);
+        const thumbTop = scrollPercentage * (trackHeight - thumbHeight);
+        
+        thumb.style.height = thumbHeight + 'px';
+        thumb.style.top = thumbTop + 'px';
+        
+        // Show scrollbar
+        mainScrollbar.classList.add('visible');
+        
+        // Clear existing timeout
+        clearTimeout(mainScrollTimeout);
+        
+        // Hide scrollbar after 2 seconds of no scrolling
+        mainScrollTimeout = setTimeout(() => {
+            mainScrollbar.classList.remove('visible');
+        }, 500);
+    }
+    
+    // Calculate and update modal scrollbar
+    function updateModalScrollbar() {
+        if (!modalScrollbar || !modal || !modal.classList.contains('active')) return;
+        
+        const scrollTop = modal.scrollTop;
+        const scrollHeight = modal.scrollHeight - modal.clientHeight;
+        
+        if (scrollHeight <= 0) {
+            modalScrollbar.classList.remove('visible');
+            return;
+        }
+        
+        const scrollPercentage = scrollTop / scrollHeight;
+        
+        const thumb = modalScrollbar.querySelector('.custom-scrollbar-thumb');
+        const trackHeight = modalScrollbar.offsetHeight;
+        const thumbHeight = Math.max(30, (modal.clientHeight / modal.scrollHeight) * trackHeight);
+        const thumbTop = scrollPercentage * (trackHeight - thumbHeight);
+        
+        thumb.style.height = thumbHeight + 'px';
+        thumb.style.top = thumbTop + 'px';
+        
+        // Show scrollbar
+        modalScrollbar.classList.add('visible');
+        
+        // Clear existing timeout
+        clearTimeout(modalScrollTimeout);
+        
+        // Hide scrollbar after 2 seconds of no scrolling
+        modalScrollTimeout = setTimeout(() => {
+            modalScrollbar.classList.remove('visible');
+        }, 2000);
+    }
+    
+    // Main page scroll handler
+    function handleMainScroll() {
+        requestAnimationFrame(updateMainScrollbar);
+    }
+    
+    // Modal scroll handler
+    function handleModalScroll() {
+        requestAnimationFrame(updateModalScrollbar);
+    }
+    
+    // Add event listeners
+    window.addEventListener('scroll', handleMainScroll, { passive: true });
+    window.addEventListener('resize', updateMainScrollbar, { passive: true });
+    
+    if (modal) {
+        modal.addEventListener('scroll', handleModalScroll, { passive: true });
+    }
+    
+    // Clean up when modal closes
+    function cleanupModal() {
+        if (modalScrollbar) {
+            modalScrollbar.classList.remove('visible');
+        }
+        clearTimeout(modalScrollTimeout);
+    }
+    
+    // Modal close events
+    const modalClose = document.querySelector('.modal-close');
+    if (modalClose) {
+        modalClose.addEventListener('click', cleanupModal);
+    }
+    
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                cleanupModal();
+            }
+        });
+    }
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            cleanupModal();
+        }
+    });
+    
+    // Initialize main scrollbar on load
+    setTimeout(updateMainScrollbar, 100);
 }

@@ -72,7 +72,7 @@
             
                 <!-- Solarpunk_Dreamscape -->
                 <div class="gallery-item stagger-item" data-category="Editorial">
-                    <img src="images/Solarpunk_Dreamscape/Solarpunk_Dreamscape.png" alt="Artwork 2">
+                    <img src="images/Solarpunk_Dreamscape/Solarpunk_Dreamscape.png" alt="Solarpunk_Dreamscape">
                     <div class="gallery-item-overlay">
                         <h3>Solarpunk Dreamscape</h3>
                         <p>Flame Tree Publishing</p>
@@ -81,38 +81,38 @@
 
                 <!-- All_About_Diffusion -->
                 <div class="gallery-item stagger-item" data-category="Sci-fi"> 
-                    <img src="images/All_About_Diffusion/All_About_Diffusion.png" alt="Artwork 1">
+                    <img src="images/All_About_Diffusion/All_About_Diffusion.png" alt="All_About_Diffusion">
                     <div class="gallery-item-overlay">
                         <h3>All About Diffusion</h3>
                         <p>Digital, 2025</p>
                         <p class="small-note">Winner of 2025 Sci-Art Competition</p>
                     </div>
                 </div>
+
+                <!-- Wave To Save -->
+                <div class="gallery-item stagger-item" data-category="Selfscape">
+                    <img src="images/Wave_To_Save/WaveToSave.png" alt="WaveToSave">
+                    <div class="gallery-item-overlay">
+                        <h3>Wave To Save</h3>
+                        <p>reEarth Art Prize</p>
+                    </div>
+                </div>
                 
                 <!-- Butchering_1 -->
                 <div class="gallery-item stagger-item" data-category="Editorial">
-                    <img src="images/Butchering_1/Butchering1.png" alt="Artwork 3">
+                    <img src="images/Butchering_1/Butchering1.png" alt="Butchering1">
                     <div class="gallery-item-overlay">
                         <h3>Butchering</h3>
                         <p>Whitelock Art Center</p>
                     </div>
                 </div>
                 
-                <!-- Image -->
+                <!-- Butchering_2 -->
                 <div class="gallery-item stagger-item" data-category="Editorial">
-                    <img src="images/Butchering_2/Butchering2.png" alt="Artwork 4">
+                    <img src="images/Butchering_2/Butchering2.png" alt="Butchering2">
                     <div class="gallery-item-overlay">
                         <h3>Butchering</h3>
                         <p>Whitelock Art Center</p>
-                    </div>
-                </div>
-                
-                <!-- Image -->
-                <div class="gallery-item stagger-item" data-category="Commercial">
-                    <img src="/api/placeholder/600/700" alt="Artwork 5">
-                    <div class="gallery-item-overlay">
-                        <h3>Eternal Form</h3>
-                        <p>Bronze, 2021</p>
                     </div>
                 </div>
                 
@@ -133,6 +133,12 @@
         <div class="modal-content">
             <span class="modal-close"><i class="fas fa-times"></i></span>
             
+            <!-- Add custom scrollbar for modal -->
+            <div class="modal-custom-scrollbar" id="modal-scrollbar">
+                <div class="custom-scrollbar-track"></div>
+                <div class="custom-scrollbar-thumb"></div>
+            </div>
+
             <!-- Modal Header with main image -->
             <div class="modal-header">
                 <img src="" alt="Artwork">
@@ -273,14 +279,22 @@
         <i class="cursor-icon fas fa-circle-dot"></i>
     </div>
 
+    <!-- Custom Scrollbars -->
+    <div class="custom-scrollbar" id="main-scrollbar">
+        <div class="custom-scrollbar-track"></div>
+        <div class="custom-scrollbar-thumb"></div>
+    </div>
+
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
     </script>
+
     <script type="text/javascript">
     (function(){
         emailjs.init("U2_mGOIfBlk4JVlSf"); // Replace with your actual public key
     })();
     </script>
+
     <script src="js/main.js"></script>
 
 </body>
