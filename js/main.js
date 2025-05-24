@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initCursor();
     initAboutSection();
     initContactForm();
-    initContactTabs(); 
 });
 
 // Header functionality with improved scroll detection
@@ -876,43 +875,114 @@ function initAboutSection() {
     // Start observing the about section
     observer.observe(aboutSection);
 }
-// Contact form functionality
+
+// Contact form functionality with EmailJS
 function initContactForm() {
-    const contactForm = document.querySelector('.contact-form');
+    // YOUR EMAILJS CONFIGURATION
+    const EMAILJS_SERVICE_ID = 'service_dinpclc'; // Replace with your service ID
+    const EMAILJS_SUBSCRIPTION_TEMPLATE = 'template_qwehn6o'; // Replace
+    const EMAILJS_MESSAGE_TEMPLATE = 'template_rwus2et'; // Replace
+
+    // Handle subscription form
+    const subscriptionForm = document.querySelector('.subscription-form');
+    if (subscriptionForm) {
+        subscriptionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            const email = this.querySelector('input[name="subscriber_email"]').value;
+            
+            // Update button
+            button.textContent = 'Subscribing...';
+            button.disabled = true;
+            
+            // Prepare template parameters
+            const templateParams = {
+                subscriber_email: email,
+                subscription_date: new Date().toLocaleDateString()
+            };
+            
+            // Send email using EmailJS
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_SUBSCRIPTION_TEMPLATE, templateParams)
+                .then(function(response) {
+                    // Success!
+                    console.log('SUCCESS!', response.status, response.text);
+                    button.textContent = 'Subscribed! ✓';
+                    button.style.backgroundColor = '#4CAF50';
+                    subscriptionForm.reset();
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.disabled = false;
+                    }, 3000);
+                }, function(error) {
+                    // Error
+                    console.log('FAILED...', error);
+                    button.textContent = 'Error - Try Again';
+                    button.style.backgroundColor = '#f44336';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.disabled = false;
+                    }, 3000);
+                });
+        });
+    }
     
+    // Handle contact form
+    const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Show sending feedback (you'd replace this with actual form submission)
             const button = this.querySelector('button[type="submit"]');
             const originalText = button.textContent;
             
+            // Update button
             button.textContent = 'Sending...';
             button.disabled = true;
             
-            // Simulate sending (replace with actual form submission)
-            setTimeout(() => {
-                // Success feedback
-                button.textContent = 'Message Sent!';
-                button.style.backgroundColor = '#000000';
-                
-                // Reset form
-                this.reset();
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.backgroundColor = '';
-                    button.disabled = false;
-                }, 3000);
-            }, 1500);
+            // Get form values
+            const templateParams = {
+                from_name: this.querySelector('input[name="from_name"]').value,
+                from_email: this.querySelector('input[name="from_email"]').value,
+                subject: this.querySelector('input[name="subject"]').value || 'No Subject',
+                message: this.querySelector('textarea[name="message"]').value
+            };
+            
+            // Send email
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_MESSAGE_TEMPLATE, templateParams)
+                .then(function(response) {
+                    // Success!
+                    console.log('SUCCESS!', response.status, response.text);
+                    button.textContent = 'Message Sent! ✓';
+                    button.style.backgroundColor = '#4CAF50';
+                    contactForm.reset();
+                    
+                    // Reset button
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.disabled = false;
+                    }, 3000);
+                }, function(error) {
+                    // Error
+                    console.log('FAILED...', error);
+                    button.textContent = 'Error - Try Again';
+                    button.style.backgroundColor = '#f44336';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.disabled = false;
+                    }, 3000);
+                });
         });
     }
-}
-
-// Contact tab switching functionality
-function initContactTabs() {
+    
+    // Handle tab switching
     const contactTabs = document.querySelectorAll('.contact-tab');
     const contactTabContents = document.querySelectorAll('.contact-tab-content');
     
@@ -933,14 +1003,4 @@ function initContactTabs() {
             }
         });
     });
-    
-    // Handle forms
-    const subscriptionForm = document.querySelector('.subscription-form');
-    if (subscriptionForm) {
-        subscriptionForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const button = this.querySelector('button[type="submit"]');
-            button.textContent = 'Subscribed!';
-        });
-    }
 }

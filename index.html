@@ -135,7 +135,7 @@
             
             <!-- Modal Header with main image -->
             <div class="modal-header">
-                <img src="" alt="Artwork" class="modal-header img">
+                <img src="" alt="Artwork">
                 <div class="modal-nav">
                     <span class="modal-prev"><i class="fas fa-chevron-left"></i></span>
                     <span class="modal-next"><i class="fas fa-chevron-right"></i></span>
@@ -185,7 +185,7 @@
             <div class="about-content">
                 <div class="about-image">
                     <img src="images/ZBY.jpeg" alt="Artist Portrait" class="default-img">
-                    <img src="images/ZBY2.jpg" alt="Artist Alternate" class="hover-img" loading="lazy">
+                    <img src="images/ZBY2.jpeg" alt="Artist Alternate" class="hover-img">
                 </div>
                 <div class="about-text fade-in">
                     <h2>About Me</h2>
@@ -212,21 +212,34 @@
                     
                     <!-- Tab Content Areas -->
                     <div class="contact-tab-content active" data-tab="subscribe">
-                        <form class="subscription-form">
+                        <form class="subscription-form" id="subscription-form">
                             <h3>Stay Updated</h3>
                             <p>Get notified about my new artwork, exhibitions, and creative insights.</p>
-                            <input type="email" placeholder="Enter your email address" required>
+                            <input type="email" 
+                                name="subscriber_email" 
+                                placeholder="Enter your email address" 
+                                required>
                             <button type="submit">Subscribe</button>
                             <p class="subscribe-note">No spam, just art. Unsubscribe anytime.</p>
                         </form>
                     </div>
                     
                     <div class="contact-tab-content" data-tab="message">
-                        <form class="contact-form">
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
-                            <input type="text" placeholder="Subject">
-                            <textarea placeholder="Your Message" required></textarea>
+                        <form class="contact-form" id="contact-form">
+                            <input type="text" 
+                                name="from_name" 
+                                placeholder="Your Name" 
+                                required>
+                            <input type="email" 
+                                name="from_email" 
+                                placeholder="Your Email" 
+                                required>
+                            <input type="text" 
+                                name="subject" 
+                                placeholder="Subject">
+                            <textarea name="message" 
+                                    placeholder="Your Message" 
+                                    required></textarea>
                             <button type="submit">Send Message</button>
                         </form>
                     </div>
@@ -260,7 +273,16 @@
         <i class="cursor-icon fas fa-circle-dot"></i>
     </div>
 
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init("U2_mGOIfBlk4JVlSf"); // Replace with your actual public key
+    })();
+    </script>
     <script src="js/main.js"></script>
 
 </body>
 </html>
+
