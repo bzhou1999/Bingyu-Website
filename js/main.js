@@ -384,6 +384,83 @@ function initModal() {
                     },
 
                 ],
+
+                [
+                    
+
+                    {
+                        src: "images/Butchering_2/Exhibition2.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 12,
+                    },
+
+                    {
+                        src: "images/Butchering_2/Exhibition1.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+
+                    {
+                        src: "images/Butchering_2/Exhibition3.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 6,
+                    },
+
+                ],
+            ]
+        },
+
+        // Crimson Tide
+        {
+            title: "Crimson Tide (赤潮 ChiChao)",
+            subtitle: "Commercial, 2025",
+            mainImage: "images/Crimson_Tide/CrimsonTide.png",
+            imageStyle: "100% 20%",
+            description: "<p>A majestic Chinese dragon, its scales intricately patterned with the emblem of Peking University (PKU), surges forward through roaring waves. Propelled by the synchronized strength of alumni rowers, the dragon boat slices through turbulent waters — each powerful stroke a testament to unity, resilience, and the enduring cultural legacy of PKU. <p>As the client beautifully states:</p><blockquote><p><em>\"No tide is too fierce for those who carry the dragon's spirit. This spirit is vividly brought to life in Bingyu's creative language. Her creative vision shines through in every detail. I fall in love with the creative design of the dragon's scales, seamlessly blending tradition, identity, and symbolic power.\"</em></p></blockquote>",
+            details: {
+                dimensions: "3402 × 2398 px",
+                materials: "Digital",
+                created: "Jan 2025",
+                collection: "Commercial Project for  Dragon Boat Team of Peking University Alumni Association - New England"
+            },
+            gallery:[ 
+
+                [
+                    {
+                        src: "images/Crimson_Tide/animation-CrimsonTide.gif",
+                        type: "landscape", 
+                        span: 12,
+                    },
+
+                ],
+              
+            
+                [
+                    {
+                        src: "images/Crimson_Tide/Outline.png",
+                        type: "landscape", 
+                        span: 12,
+                    },
+                ],
+
+                [
+                    {
+                        src: "images/Crimson_Tide/CrimsonTide.png",
+                        type: "landscape", 
+                        span: 12,
+                    },
+
+                ],
+
+                [
+                    {
+                        src: "images/Crimson_Tide/Mockup2.png",
+                        type: "landscape", // or whatever type fits the GIF's dimensions
+                        span: 12,
+                    },
+
+                ],
+
             ]
         },
 
