@@ -57,6 +57,23 @@ function initHeader() {
             navToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
     });
+
+    // Mobile nav toggle
+    if (navToggle) {
+        navToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            const isActive = nav.classList.contains('active');
+            this.innerHTML = isActive ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+    }
+
+    // Close nav when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+            nav.classList.remove('active');
+            navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
     
     // Highlight active navigation based on scroll position
     updateActiveNavOnScroll();
@@ -166,7 +183,14 @@ function initModal() {
     
     let galleryItems = document.querySelectorAll('.gallery-item');
     let currentIndex = 0;
-    
+
+    // Fix mobile scrolling for tab content
+    if (window.innerWidth <= 768) {
+        modalTabContents.forEach(content => {
+            content.style.webkitOverflowScrolling = 'touch';
+        });
+    }
+        
     // Data structure for artwork information
     const artworkData = [
         // Solarpunk Dreamscape
@@ -804,16 +828,60 @@ function initModal() {
     // Add swipe functionality for mobile
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
     
     const modalContent = document.querySelector('.modal-content');
     if (modalContent) {
-        modalContent.addEventListener('mouseenter', function() {
-            cursorDot.classList.add('on-modal');
-        });
+        // Only add mouse events if not on mobile
+        if (window.innerWidth > 768 && !('ontouchstart' in window)) {
+            modalContent.addEventListener('mouseenter', function() {
+                if (cursorDot) {
+                    cursorDot.classList.add('on-modal');
+                }
+            });
+            
+            modalContent.addEventListener('mouseleave', function() {
+                if (cursorDot) {
+                    cursorDot.classList.remove('on-modal');
+                }
+            });
+        }
         
-        modalContent.addEventListener('mouseleave', function() {
-            cursorDot.classList.remove('on-modal');
-        });
+        // Enhanced mobile swipe for modal
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        
+        modalContent.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        modalContent.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const xDiff = touchEndX - touchStartX;
+            const yDiff = Math.abs(touchEndY - touchStartY);
+            
+            // Only trigger if horizontal swipe is greater than vertical (prevents interference with scrolling)
+            if (Math.abs(xDiff) > 50 && yDiff < 100) {
+                if (xDiff < -50) {
+                    // Swipe left - next
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateModal(currentIndex);
+                } else if (xDiff > 50) {
+                    // Swipe right - previous
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateModal(currentIndex);
+                }
+            }
+        }
     }
     
     modalContent.addEventListener('touchstart', e => {
@@ -922,6 +990,11 @@ function initAnimations() {
 function initCursor() {
     cursorDot = document.querySelector('.cursor-dot');
     const heroSection = document.querySelector('.hero');
+
+    // Don't initialize cursor on mobile devices
+    if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+        return;
+    }
 
     // The .logo selector is intentionally missing from this list 
     // because we handle it separately below
